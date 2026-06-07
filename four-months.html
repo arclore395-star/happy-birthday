@@ -20,22 +20,22 @@ body {
 }
 .warm-bg .glow-1 {
   position: absolute; width: 100%; height: 100%;
-  background: radial-gradient(ellipse at 50% 15%, rgba(220,155,140,0.12) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 15%, rgba(220,155,140,0.14) 0%, transparent 60%);
   animation: pulseGlow 6s ease-in-out infinite alternate;
 }
 .warm-bg .glow-2 {
   position: absolute; width: 100%; height: 100%;
-  background: radial-gradient(ellipse at 80% 70%, rgba(210,140,125,0.08) 0%, transparent 55%);
+  background: radial-gradient(ellipse at 80% 70%, rgba(210,140,125,0.09) 0%, transparent 55%);
   animation: pulseGlow2 10s ease-in-out infinite alternate;
 }
 .warm-bg .glow-3 {
   position: absolute; width: 100%; height: 100%;
-  background: radial-gradient(ellipse at 20% 80%, rgba(225,180,160,0.07) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 20% 80%, rgba(225,180,160,0.08) 0%, transparent 50%);
   animation: pulseGlow3 8s ease-in-out infinite alternate;
 }
 .warm-bg .center-bloom {
   position: absolute; width: 100%; height: 100%;
-  background: radial-gradient(circle, rgba(220,170,155,0.08), transparent 70%);
+  background: radial-gradient(circle, rgba(220,170,155,0.09), transparent 70%);
   animation: pulseBloom 7s ease-in-out infinite alternate;
 }
 @keyframes pulseGlow {
@@ -54,7 +54,6 @@ body {
   0% { opacity: 0.5; transform: scale(0.95); }
   100% { opacity: 1; transform: scale(1.1); }
 }
-
 .warm-bg::after {
   content: ''; position: absolute; inset: 0;
   background-image:
@@ -68,16 +67,21 @@ body {
   0% { background-position: 0 0, 0 0, 0 0; }
   100% { background-position: 60px 60px, 80px 80px, 50px 50px; }
 }
-
 .vignette {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%);
 }
 
+/* === CONFETTI CANVAS === */
+#confettiCanvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 100; pointer-events: none;
+}
+
 .container {
   width: 100%; max-width: 480px; position: relative; z-index: 1;
   display: flex; flex-direction: column; align-items: center;
-  padding: 40px 0 30px;
+  padding: 30px 0 30px;
 }
 
 /* === HEARTS RAIN === */
@@ -97,31 +101,40 @@ body {
 
 /* === HEADER === */
 .header {
-  text-align: center; margin-bottom: 10px; position: relative;
+  text-align: center; margin-bottom: 8px; position: relative;
+}
+.celebration-badge {
+  display: inline-block;
+  font-family: 'Cormorant Garamond'; font-size: 0.7rem; font-style: italic;
+  color: rgba(200,144,128,0.3); letter-spacing: 2px;
+  border: 1px solid rgba(200,144,128,0.08);
+  padding: 4px 16px; border-radius: 20px; margin-bottom: 20px;
 }
 .date-range {
-  font-family: 'Quicksand'; font-size: 0.65rem; color: rgba(245,216,200,0.3);
-  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px;
+  font-family: 'Quicksand'; font-size: 0.65rem; color: rgba(245,216,200,0.25);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
 }
 .title {
   font-family: 'Cormorant Garamond'; font-size: 2.2rem; font-weight: 300;
-  color: #f5d8c8; line-height: 1.3; font-style: italic;
-  margin-bottom: 6px;
+  color: #f5d8c8; line-height: 1.3; font-style: italic; margin-bottom: 6px;
+}
+.title .highlight {
+  color: rgba(200,144,128,0.5); font-weight: 400;
 }
 .title span {
   display: block; font-size: 1rem; font-weight: 300; font-style: normal;
-  color: rgba(245,216,200,0.4); margin-top: 4px; letter-spacing: 3px;
+  color: rgba(245,216,200,0.35); margin-top: 4px; letter-spacing: 3px;
   text-transform: uppercase; font-family: Quicksand;
 }
 
 /* === COUNTER === */
 .counter {
   display: flex; flex-direction: column; align-items: center;
-  margin: 20px 0 28px; position: relative;
+  margin: 18px 0 24px; position: relative;
 }
 .counter-ring {
   width: 160px; height: 160px; border-radius: 50%;
-  border: 1px solid rgba(200,144,128,0.15);
+  border: 1px solid rgba(200,144,128,0.18);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   position: relative; background: rgba(200,144,128,0.03);
   box-shadow: 0 0 40px rgba(200,144,128,0.05), inset 0 0 40px rgba(200,144,128,0.03);
@@ -129,24 +142,36 @@ body {
 }
 @keyframes ringPulse {
   0% { box-shadow: 0 0 40px rgba(200,144,128,0.05), inset 0 0 40px rgba(200,144,128,0.03); }
-  100% { box-shadow: 0 0 60px rgba(200,144,128,0.1), inset 0 0 50px rgba(200,144,128,0.05); }
+  100% { box-shadow: 0 0 60px rgba(200,144,128,0.12), inset 0 0 50px rgba(200,144,128,0.05); }
 }
 .counter-ring .big-num {
   font-family: 'Cormorant Garamond'; font-size: 3.2rem; font-weight: 300;
   color: #f5d8c8; line-height: 1; letter-spacing: 2px;
 }
 .counter-ring .big-label {
-  font-family: 'Quicksand'; font-size: 0.6rem; color: rgba(245,216,200,0.3);
+  font-family: 'Quicksand'; font-size: 0.55rem; color: rgba(245,216,200,0.25);
   letter-spacing: 2px; text-transform: uppercase; margin-top: 2px;
 }
+.counter-ring .ring-heart {
+  position: absolute; font-size: 0.5rem; color: rgba(200,144,128,0.12);
+  animation: ringHeartFloat 3s ease-in-out infinite alternate;
+}
+.counter-ring .ring-heart.tl { top: 12px; left: 14px; }
+.counter-ring .ring-heart.tr { top: 12px; right: 14px; animation-delay: 1s; }
+.counter-ring .ring-heart.bl { bottom: 12px; left: 14px; animation-delay: 0.5s; }
+.counter-ring .ring-heart.br { bottom: 12px; right: 14px; animation-delay: 1.5s; }
+@keyframes ringHeartFloat {
+  0% { transform: translateY(0) scale(1); opacity: 0.12; }
+  100% { transform: translateY(-3px) scale(1.1); opacity: 0.2; }
+}
 .counter-sub {
-  font-family: 'Dancing Script'; font-size: 1.1rem; color: rgba(200,144,128,0.5);
+  font-family: 'Dancing Script'; font-size: 1.05rem; color: rgba(200,144,128,0.4);
   margin-top: 14px; font-weight: 400;
 }
 
 /* === TIMELINE === */
 .timeline {
-  width: 100%; padding: 0 20px; margin: 20px 0;
+  width: 100%; padding: 0 20px; margin: 18px 0;
   display: flex; flex-direction: column; gap: 0;
 }
 .timeline-item {
@@ -173,11 +198,9 @@ body {
 .timeline-item.today .timeline-dot .inner {
   background: rgba(200,144,128,0.4);
 }
-.timeline-content {
-  flex: 1; min-width: 0;
-}
+.timeline-content { flex: 1; min-width: 0; }
 .timeline-date {
-  font-family: 'Quicksand'; font-size: 0.6rem; color: rgba(245,216,200,0.25);
+  font-family: 'Quicksand'; font-size: 0.55rem; color: rgba(245,216,200,0.2);
   letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px;
 }
 .timeline-title {
@@ -185,13 +208,13 @@ body {
   color: #f5d8c8; font-style: italic; line-height: 1.4;
 }
 .timeline-sub {
-  font-family: 'Quicksand'; font-size: 0.7rem; color: rgba(245,216,200,0.35);
+  font-family: 'Quicksand'; font-size: 0.65rem; color: rgba(245,216,200,0.3);
   line-height: 1.5; margin-top: 3px;
 }
 
-/* === LOVE LETTER === */
+/* === MAIN LOVE LETTER === */
 .letter {
-  width: 100%; max-width: 400px; margin: 28px 0 24px; padding: 0 16px;
+  width: 100%; max-width: 400px; margin: 24px 0 20px; padding: 0 16px;
 }
 .letter-card {
   background: rgba(200,144,128,0.03);
@@ -204,25 +227,63 @@ body {
   transform: translateX(-50%); font-size: 0.7rem; color: rgba(200,144,128,0.15);
 }
 .letter-text {
-  font-family: 'Dancing Script'; font-size: 1.05rem; line-height: 1.8;
+  font-family: 'Dancing Script'; font-size: 1rem; line-height: 1.8;
   color: #f5d8c8; text-align: left; font-weight: 400;
 }
-.letter-text .amp {
-  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.3rem;
-  color: rgba(200,144,128,0.4);
-}
 .letter-signoff {
-  font-family: 'Dancing Script'; font-size: 1.2rem; text-align: right;
-  color: rgba(200,144,128,0.5); margin-top: 16px; font-weight: 500;
+  font-family: 'Dancing Script'; font-size: 1.1rem; text-align: right;
+  color: rgba(200,144,128,0.45); margin-top: 14px; font-weight: 500;
 }
 
-/* === REASONS / MEMORIES === */
+/* === LOVE NOTES (tap to open) === */
+.notes-section {
+  width: 100%; max-width: 400px; padding: 0 16px; margin: 10px 0 20px;
+}
+.notes-title {
+  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1rem;
+  color: rgba(245,216,200,0.35); text-align: center; margin-bottom: 14px;
+  font-weight: 300;
+}
+.note-grid {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.note-card {
+  background: rgba(200,144,128,0.03);
+  border: 1px solid rgba(200,144,128,0.06);
+  border-radius: 14px; padding: 14px 18px; cursor: pointer;
+  transition: all 0.4s ease; position: relative; overflow: hidden;
+}
+.note-card:active { transform: scale(0.98); }
+.note-card .nc-label {
+  font-family: 'Dancing Script'; font-size: 0.9rem;
+  color: rgba(200,144,128,0.4); font-weight: 400;
+  transition: all 0.4s ease; position: relative; z-index: 1;
+}
+.note-card .nc-seal {
+  font-size: 0.5rem; color: rgba(200,144,128,0.1);
+  letter-spacing: 0.5px; margin-top: 3px; font-family: Quicksand;
+  text-transform: uppercase; transition: all 0.4s ease; position: relative; z-index: 1;
+}
+.note-card .nc-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+  opacity: 0; position: relative; z-index: 1;
+  font-family: 'Dancing Script'; font-size: 0.9rem; line-height: 1.7;
+  color: #f5d8c8;
+}
+.note-card.opened .nc-body {
+  max-height: 200px; opacity: 1; margin-top: 12px;
+}
+.note-card.opened .nc-label { color: #f5d8c8; }
+.note-card.opened .nc-seal { opacity: 0; }
+
+/* === REASONS === */
 .reasons {
-  width: 100%; max-width: 400px; padding: 0 16px; margin-bottom: 20px;
+  width: 100%; max-width: 400px; padding: 0 16px; margin-bottom: 18px;
 }
 .reasons-title {
-  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.1rem;
-  color: rgba(245,216,200,0.4); text-align: center; margin-bottom: 14px;
+  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1rem;
+  color: rgba(245,216,200,0.35); text-align: center; margin-bottom: 12px;
   font-weight: 300;
 }
 .reason-item {
@@ -230,7 +291,7 @@ body {
   border-radius: 12px;
   background: rgba(200,144,128,0.03);
   border: 1px solid rgba(200,144,128,0.06);
-  font-family: 'Quicksand'; font-size: 0.78rem; color: rgba(245,216,200,0.5);
+  font-family: 'Quicksand'; font-size: 0.75rem; color: rgba(245,216,200,0.4);
   line-height: 1.5; text-align: center;
   transition: all 0.4s ease; cursor: pointer;
 }
@@ -238,41 +299,40 @@ body {
   color: #f5d8c8; background: rgba(200,144,128,0.05);
   border-color: rgba(200,144,128,0.1);
 }
-.reason-item .hidden-text {
-  display: none;
-}
-.reason-item.revealed .hidden-text {
-  display: inline;
-}
+.reason-item .hidden-text { display: none; }
+.reason-item.revealed .hidden-text { display: inline; }
 
-/* === FLOATING ELEMENTS === */
-.floating-hearts {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+/* === PROMISE SECTION === */
+.promise {
+  width: 100%; max-width: 400px; padding: 0 16px; margin: 14px 0 20px;
 }
-.f-heart {
-  position: absolute; bottom: -20px; opacity: 0;
-  font-family: 'Dancing Script'; animation: floatUp linear infinite;
+.promise-card {
+  background: rgba(200,144,128,0.02);
+  border: 1px solid rgba(200,144,128,0.06);
+  border-radius: 16px; padding: 24px 20px; text-align: center;
 }
-@keyframes floatUp {
-  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.12; }
-  90% { opacity: 0.05; }
-  100% { transform: translateY(-110vh) translateX(30px) rotate(120deg); opacity: 0; }
+.promise-text {
+  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 0.95rem;
+  color: #f5d8c8; line-height: 1.7; font-weight: 300;
+}
+.promise-label {
+  font-family: 'Quicksand'; font-size: 0.5rem; color: rgba(200,144,128,0.2);
+  letter-spacing: 2px; text-transform: uppercase; margin-top: 12px;
 }
 
 /* === QUOTE === */
 .quote-section {
-  width: 100%; max-width: 400px; padding: 0 16px; margin: 10px 0 30px;
+  width: 100%; max-width: 400px; padding: 0 16px; margin: 4px 0 24px;
   text-align: center;
 }
 .quote-text {
-  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.15rem;
-  color: rgba(245,216,200,0.3); line-height: 1.6; font-weight: 300;
+  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.05rem;
+  color: rgba(245,216,200,0.25); line-height: 1.6; font-weight: 300;
   min-height: 60px; transition: opacity 0.8s;
 }
 .quote-text .source {
-  display: block; font-size: 0.7rem; font-style: normal;
-  color: rgba(245,216,200,0.15); margin-top: 8px;
+  display: block; font-size: 0.65rem; font-style: normal;
+  color: rgba(245,216,200,0.12); margin-top: 8px;
   font-family: Quicksand; letter-spacing: 1px; text-transform: uppercase;
 }
 
@@ -288,7 +348,7 @@ body {
 /* === PETALS === */
 .petal {
   position: fixed; z-index: 0; pointer-events: none; opacity: 0;
-  width: 10px; height: 10px; border-radius: 50% 0 50% 0;
+  border-radius: 50% 0 50% 0;
   animation: petalFall linear infinite;
 }
 @keyframes petalFall {
@@ -316,21 +376,26 @@ body {
   <div class="center-bloom"></div>
 </div>
 <div class="vignette"></div>
+<canvas id="confettiCanvas"></canvas>
 <div class="hearts-rain" id="heartsRain"></div>
-<div class="floating-hearts" id="floatingHearts"></div>
 
 <div class="container">
   <div class="header">
+    <div class="celebration-badge">&#10022; four months of love &#10022;</div>
     <div class="date-range">feb 8 &nbsp;&bull;&nbsp; jun 8 &nbsp;&bull;&nbsp; 2026</div>
     <div class="title">
-      four months
+      four <span class="highlight">months</span>
       <span>of us</span>
     </div>
   </div>
 
   <div class="counter">
     <div class="counter-ring">
-      <div class="big-num">122</div>
+      <div class="ring-heart tl">&#9829;</div>
+      <div class="ring-heart tr">&#9829;</div>
+      <div class="ring-heart bl">&#9829;</div>
+      <div class="ring-heart br">&#9829;</div>
+      <div class="big-num" id="daysCount">122</div>
       <div class="big-label">days together</div>
     </div>
     <div class="counter-sub">and every one has mattered</div>
@@ -350,7 +415,7 @@ body {
       <div class="timeline-content">
         <div class="timeline-date">mar 8</div>
         <div class="timeline-title">one month</div>
-        <div class="timeline-sub">already couldn't imagine a day without you. the world felt softer.</div>
+        <div class="timeline-sub">already couldn't imagine a day without you. the world felt softer with you in it.</div>
       </div>
     </div>
     <div class="timeline-item">
@@ -373,7 +438,7 @@ body {
       <div class="timeline-dot"><div class="inner"></div></div>
       <div class="timeline-content">
         <div class="timeline-date">jun 8 — today</div>
-        <div class="timeline-title">four months</div>
+        <div class="timeline-title">four months <span style="font-style:normal;font-size:0.7rem;">&#10022;</span></div>
         <div class="timeline-sub">and i'd choose you again. in every world. in every heartbeat. always you.</div>
       </div>
     </div>
@@ -382,28 +447,74 @@ body {
   <div class="letter">
     <div class="letter-card">
       <div class="letter-text">
-        four months of waking up to the thought of you. four months of finding you in everything — in the way the light falls at dusk, in songs i never noticed before, in the quiet moments when i catch myself smiling at nothing.<br><br>
-        you've become my favorite place. the one i keep coming back to. the one that feels like <span class="amp">&</span> i belong.<br><br>
-        loving you is the easiest thing i've ever done. it flows like a river that was always meant to find the sea.<br><br>
-        here's to us. here's to forever.
+        four months. four seasons of finding you in everything. in the way light falls through the window at dusk, in songs i never noticed before, in the quiet moments when i catch myself smiling at nothing because you crossed my mind.<br><br>
+        you've become my favorite place — the one i keep coming back to, the one that feels like i belong. loving you is the easiest thing i've ever done, like a river that was always meant to find the sea.<br><br>
+        here's to us. here to every laugh, every quiet moment, every time your hand found mine.<br><br>
+        here's to four months, and to all the months that are yet to come.
       </div>
-      <div class="letter-signoff">always, you & i</div>
+      <div class="letter-signoff">always, yours</div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <div class="notes-title">little love notes for you</div>
+    <div class="note-grid">
+      <div class="note-card" onclick="this.classList.toggle('opened')">
+        <div class="nc-label">&#10022; the first time i saw you</div>
+        <div class="nc-seal">&#9829; tap to open</div>
+        <div class="nc-body">i remember thinking the universe must have paused for a moment. like everything before that was just waiting. and then there you were.</div>
+      </div>
+      <div class="note-card" onclick="this.classList.toggle('opened')">
+        <div class="nc-label">&#10022; the way you laugh</div>
+        <div class="nc-seal">&#9829; tap to open</div>
+        <div class="nc-body">it's my favorite sound. not because it's perfect, but because it's real. it spills out of you like joy that couldn't be contained, and every time i hear it, i fall a little more.</div>
+      </div>
+      <div class="note-card" onclick="this.classList.toggle('opened')">
+        <div class="nc-label">&#10022; the quiet moments</div>
+        <div class="nc-seal">&#9829; tap to open</div>
+        <div class="nc-body">sitting in silence with you feels louder than any conversation. like our hearts are speaking in a language that doesn't need words. those are the moments i treasure most.</div>
+      </div>
+      <div class="note-card" onclick="this.classList.toggle('opened')">
+        <div class="nc-label">&#10022; what four months feels like</div>
+        <div class="nc-seal">&#9829; tap to open</div>
+        <div class="nc-body">it feels like i've known you forever, and yet every day i discover something new to love about you. four months of learning what it means to truly care for someone. and i'd do it all over again.</div>
+      </div>
+      <div class="note-card" onclick="this.classList.toggle('opened')">
+        <div class="nc-label">&#10022; a promise</div>
+        <div class="nc-seal">&#9829; tap to open</div>
+        <div class="nc-body">i promise to keep choosing you. on the easy days and the hard ones. in the quiet and in the noise. i promise to love you not just when it's easy, but especially when it's not.</div>
+      </div>
     </div>
   </div>
 
   <div class="reasons">
     <div class="reasons-title">things i love about you</div>
     <div class="reason-item" onclick="this.classList.toggle('revealed')">
-      <span class="hidden-text">the way you make ordinary moments feel like poetry</span>&#8288;
+      &#8288;<span class="hidden-text">the way you make ordinary moments feel like poetry</span>
     </div>
     <div class="reason-item" onclick="this.classList.toggle('revealed')">
-      <span class="hidden-text">your laugh — it's my favorite sound in the world</span>&#8288;
+      &#8288;<span class="hidden-text">your laugh — it's my favorite sound in the world</span>
     </div>
     <div class="reason-item" onclick="this.classList.toggle('revealed')">
-      <span class="hidden-text">the way you care, deeply and quietly, without expecting anything back</span>&#8288;
+      &#8288;<span class="hidden-text">the way you care, deeply and quietly, without expecting anything back</span>
     </div>
     <div class="reason-item" onclick="this.classList.toggle('revealed')">
-      <span class="hidden-text">how safe i feel when i'm with you</span>&#8288;
+      &#8288;<span class="hidden-text">how safe i feel when i'm with you</span>
+    </div>
+    <div class="reason-item" onclick="this.classList.toggle('revealed')">
+      &#8288;<span class="hidden-text">the way you look at me like i'm the only one in the room</span>
+    </div>
+    <div class="reason-item" onclick="this.classList.toggle('revealed')">
+      &#8288;<span class="hidden-text">that even on hard days, you're still the best part of them</span>
+    </div>
+  </div>
+
+  <div class="promise">
+    <div class="promise-card">
+      <div class="promise-text">
+        "i carry your heart with me<br>i carry it in my heart<br>i am never without it<br>anywhere i go you go"
+      </div>
+      <div class="promise-label">— e.e. cummings</div>
     </div>
   </div>
 
@@ -421,57 +532,143 @@ body {
 
 <script>
 (function() {
-  // Hearts rain
+  // === CONFETTI BURST ===
+  var canvas = document.getElementById('confettiCanvas');
+  var ctx = canvas.getContext('2d');
+  var W, H;
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var pieces = [];
+  var colors = [
+    'rgba(200,144,128,', 'rgba(220,170,155,', 'rgba(245,216,200,',
+    'rgba(180,130,110,', 'rgba(210,160,140,', 'rgba(190,150,130,'
+  ];
+  var totalBursts = 3;
+  var isAnimating = false;
+
+  function spawnBurst() {
+    var cx = W * (0.2 + Math.random() * 0.6);
+    var cy = H * (0.15 + Math.random() * 0.35);
+    for (var i = 0; i < 60; i++) {
+      var angle = Math.random() * Math.PI * 2;
+      var speed = 2 + Math.random() * 7;
+      var color = colors[Math.floor(Math.random() * colors.length)];
+      pieces.push({
+        x: cx, y: cy,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 4,
+        size: 4 + Math.random() * 7,
+        color: color + (0.5 + Math.random() * 0.4) + ')',
+        life: 1,
+        decay: 0.007 + Math.random() * 0.012,
+        rot: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 8,
+        shape: Math.random() > 0.5 ? 'rect' : 'circle'
+      });
+    }
+  }
+
+  window.confettiBurst = function() {
+    if (isAnimating) return;
+    isAnimating = true;
+    var bursts = 0;
+    function fire() {
+      spawnBurst();
+      bursts++;
+      if (bursts < totalBursts) setTimeout(fire, 350 + Math.random() * 500);
+    }
+    fire();
+    animate();
+  };
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    var alive = false;
+    for (var i = 0; i < pieces.length; i++) {
+      var p = pieces[i];
+      if (p.life <= 0) continue;
+      alive = true;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.06;
+      p.life -= p.decay;
+      p.rot += p.rotSpeed;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'rect') {
+        ctx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size/2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+    if (alive) requestAnimationFrame(animate);
+    else isAnimating = false;
+  }
+  })();
+
+  // === HEARTS RAIN ===
   var rain = document.getElementById('heartsRain');
-  for (var i = 0; i < 18; i++) {
+  for (var i = 0; i < 20; i++) {
     var h = document.createElement('div');
     h.className = 'heart-drop';
     h.textContent = '\u2661';
-    h.style.left = (3 + Math.random() * 94) + '%';
-    h.style.fontSize = (7 + Math.random() * 8) + 'px';
-    h.style.animationDuration = (12 + Math.random() * 18) + 's';
-    h.style.animationDelay = (Math.random() * 20) + 's';
+    h.style.left = (2 + Math.random() * 96) + '%';
+    h.style.fontSize = (6 + Math.random() * 9) + 'px';
+    h.style.animationDuration = (14 + Math.random() * 20) + 's';
+    h.style.animationDelay = (Math.random() * 22) + 's';
     h.style.opacity = '0';
     rain.appendChild(h);
   }
 
-  // Floating hearts (bottom-up)
-  var floatContainer = document.getElementById('floatingHearts');
+  // === FLOATING HEARTS ===
+  var floatContainer = document.createElement('div');
+  floatContainer.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;';
+  document.body.appendChild(floatContainer);
   var symbols = ['\u2661', '\u2665', '\u2726', '\u2734'];
-  for (var i = 0; i < 12; i++) {
+  for (var i = 0; i < 14; i++) {
     var fh = document.createElement('div');
     fh.className = 'f-heart';
+    fh.style.cssText = 'position:absolute;bottom:-20px;opacity:0;font-family:Dancing Script;animation:floatUp linear infinite;';
     fh.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    fh.style.left = (5 + Math.random() * 90) + '%';
+    fh.style.left = (3 + Math.random() * 94) + '%';
     fh.style.fontSize = (8 + Math.random() * 10) + 'px';
-    fh.style.animationDuration = (16 + Math.random() * 20) + 's';
-    fh.style.animationDelay = (Math.random() * 25) + 's';
+    fh.style.animationDuration = (18 + Math.random() * 22) + 's';
+    fh.style.animationDelay = (Math.random() * 28) + 's';
     fh.style.color = 'rgba(200,144,128,' + (0.04 + Math.random() * 0.08) + ')';
     floatContainer.appendChild(fh);
   }
 
-  // Petals
-  for (var i = 0; i < 10; i++) {
+  // === PETALS ===
+  for (var i = 0; i < 12; i++) {
     var p = document.createElement('div');
     p.className = 'petal';
     p.style.left = (2 + Math.random() * 96) + '%';
     p.style.background = 'rgba(200,144,128,0.08)';
-    p.style.width = (7 + Math.random() * 6) + 'px';
-    p.style.height = (7 + Math.random() * 6) + 'px';
-    p.style.animationDuration = (14 + Math.random() * 16) + 's';
-    p.style.animationDelay = (Math.random() * 20) + 's';
+    p.style.width = (6 + Math.random() * 7) + 'px';
+    p.style.height = (6 + Math.random() * 7) + 'px';
+    p.style.animationDuration = (15 + Math.random() * 18) + 's';
+    p.style.animationDelay = (Math.random() * 22) + 's';
     document.body.appendChild(p);
   }
 
-  // Quote rotator
+  // === QUOTE ROTATOR ===
   var quotes = [
     '"in all the world, there is no heart for me like yours." <span class="source">— maya angelou</span>',
     '"i have found the one whom my soul loves." <span class="source">— song of solomon 3:4</span>',
     '"you are my sun, my moon, and all my stars." <span class="source">— e.e. cummings</span>',
     '"wherever you are is my home." <span class="source">— unknown</span>',
-    '"i loved you from the very first day." <span class="source">— unknown</span>',
     '"you make me want to be a better person." <span class="source">— as good as it gets</span>',
-    '"love is not about how many days, months, or years you\'ve been together. it\'s about how much you love each other every single day." <span class="source">— unknown</span>'
+    '"love is not about how many days, months, or years you\'ve been together. it\'s about how much you love each other every single day." <span class="source">— unknown</span>',
+    '"i loved you from the very first day." <span class="source">— unknown</span>',
+    '"you are the finest, loveliest, tenderest, and most beautiful person i have ever known." <span class="source">— f. scott fitzgerald</span>'
   ];
   var quoteEl = document.getElementById('quoteText');
   var qi = 0;
@@ -485,5 +682,83 @@ body {
   }, 5000);
 })();
 </script>
-</body>
-</html>
+<style>
+.f-heart {
+  position: absolute; bottom: -20px; opacity: 0;
+  font-family: 'Dancing Script'; animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.12; }
+  90% { opacity: 0.05; }
+  100% { transform: translateY(-110vh) translateX(30px) rotate(120deg); opacity: 0; }
+}
+
+/* === ENTRY OVERLAY === */
+#entryOverlay {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: #0d0205; cursor: pointer;
+  transition: opacity 0.8s ease; -webkit-tap-highlight-color: transparent;
+}
+#entryOverlay.fade-out { opacity: 0; pointer-events: none; }
+.entry-heart {
+  font-size: 2rem; color: rgba(200,144,128,0.2); margin-bottom: 20px;
+  animation: entryPulse 2s ease-in-out infinite;
+}
+@keyframes entryPulse {
+  0% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.15); opacity: 0.35; }
+  100% { transform: scale(1); opacity: 0.2; }
+}
+.entry-text {
+  font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.1rem;
+  color: rgba(245,216,200,0.25); font-weight: 300; letter-spacing: 1px;
+}
+.entry-sub {
+  font-family: 'Quicksand'; font-size: 0.55rem; color: rgba(245,216,200,0.1);
+  letter-spacing: 3px; text-transform: uppercase; margin-top: 16px;
+  animation: entryBlink 1.5s ease-in-out infinite;
+}
+@keyframes entryBlink {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+/* === SPOTIFY EMBED (hidden) === */
+#musicPlayer {
+  position: fixed; bottom: 0; left: 0; width: 1px; height: 1px;
+  opacity: 0; pointer-events: none; z-index: -1;
+}
+</style>
+</head>
+<body>
+
+<div id="entryOverlay" onclick="startExperience()">
+  <div class="entry-heart">&#9829;</div>
+  <div class="entry-text">tap here to begin</div>
+  <div class="entry-sub">&#10022; for you &#10022;</div>
+</div>
+
+<div id="musicPlayer"></div>
+
+<script>
+function startExperience() {
+  var overlay = document.getElementById('entryOverlay');
+  overlay.classList.add('fade-out');
+  setTimeout(function() { overlay.style.display = 'none'; }, 900);
+
+  // Inject Spotify player
+  var player = document.getElementById('musicPlayer');
+  player.style.cssText = 'position:fixed;bottom:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;z-index:-1;';
+  var iframe = document.createElement('iframe');
+  iframe.src = 'https://open.spotify.com/embed/track/0LQNr3HiIZAFqnXog3iyCI?autoplay=true&utm_source=oembed';
+  iframe.style.cssText = 'width:100%;height:100%;border:none;';
+  iframe.allow = 'autoplay';
+  player.appendChild(iframe);
+
+  // Trigger confetti
+  if (window.confettiBurst) window.confettiBurst();
+}
+
+(function() {
